@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import './App.css';
 
 
-function UseStateForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [age, setAge] = useState('');
-  const [city, setcity] = useState('');
+function UseRefForm() {
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const ageRef = useRef(null);
+  const addressRef = useRef(null);
 
-  const handleChange = (setter) => (e) => {
-    setter(e.target.value);
+  const handleChange = () => {
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const age = ageRef.current.value;
+    const address = addressRef.current.value;
+    console.log(`Name: ${name}, Email: ${email}, Age: ${age}, Address: ${address}`);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Name: ${name}, Email: ${email}, Age: ${age}, City: ${city}`);
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const age = ageRef.current.value;
+    const address = addressRef.current.value;
+    alert(`Name: ${name}, Email: ${email}, Age: ${age}, Address: ${address}`);
   };
 
   return (
@@ -23,32 +31,32 @@ function UseStateForm() {
         <label>Name: </label>
         <input 
           type="text" 
-          value={name} 
-          onChange={handleChange(setName)} 
+          ref={nameRef} 
+          onChange={handleChange}
         />
       </div>
       <div>
         <label>Email: </label>
         <input 
           type="email" 
-          value={email} 
-          onChange={handleChange(setEmail)} 
+          ref={emailRef} 
+          onChange={handleChange}
         />
       </div>
       <div>
         <label>Age: </label>
         <input 
           type="number" 
-          value={age} 
-          onChange={handleChange(setAge)} 
+          ref={ageRef} 
+          onChange={handleChange}
         />
       </div>
       <div>
-        <label>City: </label>
+        <label>Address: </label>
         <input 
           type="text" 
-          value={city} 
-          onChange={handleChange(setcity)} 
+          ref={addressRef} 
+          onChange={handleChange}
         />
       </div>
       <button type="submit">Submit</button>
@@ -56,5 +64,5 @@ function UseStateForm() {
   );
 }
 
-export default UseStateForm;
+export default UseRefForm;
 
